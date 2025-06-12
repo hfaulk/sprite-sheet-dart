@@ -1,6 +1,6 @@
 sheet{
     image_file: textures/balls.png;
-    dimensions: (320, 64);
+    dim: (320, 64);
     animation: true;
 }
 
