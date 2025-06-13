@@ -1,4 +1,5 @@
 sheet{
+// stuff for sheet info //
     image_file: textures/balls.png;
     dim: (320, 64);
     animation: true;

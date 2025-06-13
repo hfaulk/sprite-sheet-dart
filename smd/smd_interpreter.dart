@@ -2,19 +2,19 @@ import "dart:io";
 import "dart:async";
 
 void main() async {
-  var a = SmdInterpret("test.smd");
+  var a = SmdInterpreter("../test.smd");
   var sections = a._sectionFinder(await a._readFile());
   print(sections);
 }
 
-class SmdInterpret{
+class SmdInterpreter{
   String filePath;
   final Map<String,String> validSections = { // Will only search for these sections
     "sheet":"req",
     "sprite":"req",
     "animation":"opt"};
 
-  SmdInterpret(this.filePath);
+  SmdInterpreter(this.filePath);
 
   Future<String> _readFile() async { // Pulling & sanitising data from file
     String fileContentsRaw = await File(filePath).readAsString();
@@ -58,5 +58,6 @@ class SmdInterpret{
     return sections;
   }
 
-
+  void parse(){
+  }
 }
