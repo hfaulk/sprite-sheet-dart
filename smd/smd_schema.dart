@@ -9,6 +9,10 @@ class SchemaField{
   final List<dynamic>? limit; // Provide specific values it can be
 
   SchemaField(this.name, this.type, {this.limit});
+
+  String toString(){
+    return "Name: $name, Type: $type, Limit: $limit";
+  }
 }
 
 class SchemaSection{
@@ -20,6 +24,10 @@ class SchemaSection{
     required this.type,
     required this.required,
     required this.fields});
+
+  String toString(){
+    return "Type: $type, Required?: $required, Fields: $fields";
+  }
 }
 
 Map<String, SchemaSection> baseSchema = {

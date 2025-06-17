@@ -1,5 +1,6 @@
 import "dart:io";
 import "dart:async";
+import "smd_schema.dart";
 
 void main() async {
   var a = SmdInterpreter("../test.smd");
@@ -9,10 +10,6 @@ void main() async {
 
 class SmdInterpreter{
   String filePath;
-  final Map<String,String> validSections = { // Will only search for these sections
-    "sheet":"req",
-    "sprite":"req",
-    "animation":"opt"};
 
   SmdInterpreter(this.filePath);
 
@@ -24,12 +21,12 @@ class SmdInterpreter{
     return fileContents;
   }
 
-  List<String> _sectionFinder(String fileContents){
+  List<String> _sectionFinder(String fileContents){ // Returns list of sections
     List<String> sections = [];
-    for (String section in validSections.keys){
+    for (String section in baseSchema.keys){
       int sectStart = fileContents.indexOf("$section{"); // Find where section starts
       if (sectStart == -1){ // -1 = substring not found
-        if (validSections[section] == "req"){
+        if (baseSchema[section]!.required == true){
           throw FormatException("Expected section '$section', but wasn't found");
         } else{
           continue; // Skip to next iter for not included optionals
